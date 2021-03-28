@@ -24,11 +24,12 @@ var myDict = map[int]int{
 }
 
 func main() {
+	limit := 1000000
 	passes := 0
 	start := time.Now()
 	p := primeBool{}
 	for time.Since(start).Seconds() < 10 {
-		p.Set(1000000)
+		p.Set(limit)
 		p.Run()
 		passes++
 	}
@@ -38,6 +39,7 @@ func main() {
 
 func (p *primeBool) Set(index int) {
 	p.size = index
+	p.isPrime = nil
 	p.isPrime = make([]bool, index+1)
 	p.sqrt = int(math.Sqrt(float64(index)))
 	p.isPrime[2] = true
@@ -52,16 +54,20 @@ func (p *primeBool) Set(index int) {
 func (p *primeBool) Run() {
 	factor := 3
 	for factor <= p.sqrt {
-		for num := factor; num <= p.size; num++ {
+		for num := factor; num <= p.size; num = num + 2 {
 			if p.isPrime[num] {
 				factor = num
 				break
 			}
 		}
-		for num := factor * 3; num <= p.size; num += factor * 2 {
-			p.isPrime[num] = false
-		}
-		factor++
+		p.clear(factor)
+		factor = factor + 2
+	}
+}
+
+func (p *primeBool) clear(factor int) {
+	for num := factor * 3; num <= p.size; num += factor * 2 {
+		p.isPrime[num] = false
 	}
 }
 
