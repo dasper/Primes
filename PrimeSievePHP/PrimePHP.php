@@ -26,7 +26,19 @@ class PrimeSieve {
     function __construct(int $n)
     {
         $this->sieveSize = $n;
+        $this->createArray();
+        $this->hydrateArray();
+    }
+
+    private function createArray()
+    {
+        $n = $this->sieveSize;
         $this->isPrime = array_fill(0, $n+1, false);
+    }
+
+    private function hydrateArray()
+    {
+        $n = $this->sieveSize;
         $this->isPrime[2] = true;
         for ($i = 3; $i <= $n+1; $i = $i + 2) {
             if ($i%2 != 0) {
@@ -50,11 +62,15 @@ class PrimeSieve {
                     break;
                 }
             }
-            for ($num = $factor * 3; $num < $this->sieveSize; $num += $factor * 2) {
-                $this->isPrime[$num] = false;
-            }
-             
+            $this->clearBit($factor);    
             $factor += 2;
+        }
+    }
+
+    private function clearBit($factor)
+    {
+        for ($num = $factor * 3; $num < $this->sieveSize; $num += $factor * 2) {
+            $this->isPrime[$num] = false;
         }
     }
 
