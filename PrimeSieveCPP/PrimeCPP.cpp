@@ -3,6 +3,8 @@
 // ---------------------------------------------------------------------------
 
 #include <chrono>
+#include <cstring>
+#include <math.h>
 #include <ctime>
 #include <iostream>
 #include <bitset>
