@@ -14,13 +14,11 @@ public class PrimeJava {
     PrimeSieve sieve = null;
     final long tStart = currentTimeMillis();
 
-    System.out.println("Computing Primes");
     while (MILLISECONDS.toSeconds(currentTimeMillis() - tStart) < 10) {
       sieve = new PrimeSieve(1000000);
       sieve.runSieve();
       passes++;
     }
-    System.out.println("Completed");
 
     final long tD = currentTimeMillis() - tStart;
     if (sieve != null)

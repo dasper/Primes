@@ -92,7 +92,7 @@ class prime_sieve(object):
     # runSieve, of course!
 
     def countPrimes(this):
-        return sum(1 for b in this.rawbits if b);
+        return sum(1 for b in this.rawbits if b)
 
     # printResults
     #
@@ -101,7 +101,7 @@ class prime_sieve(object):
     def printResults(this, showResults, duration, passes):
 
         if (showResults): # Since we auto-filter evens, we have to special case the number 2 which is prime
-            stdout.write("2, ");
+            stdout.write("2, ")
 
         count = 1
         for num in range (3, this.sieveSize): # Count (and optionally dump) the primes that were found below the limit
@@ -111,7 +111,7 @@ class prime_sieve(object):
                 count+=1
 
         assert(count == this.countPrimes())
-        stdout.write("\n");
+        stdout.write("\n")
         print("Passes: " + str(passes) + ", Time: " + str(duration) + ", Avg: " + str(duration/passes) + ", Limit: " + str(this.sieveSize) + ", Count: " + str(count) + ", Valid: " + str(this.validateResults()))
   
 # MAIN Entry
